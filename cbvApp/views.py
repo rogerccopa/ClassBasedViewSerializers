@@ -8,6 +8,15 @@ from django.http import Http404
 
 from rest_framework import generics, mixins
 
+class StudentList(generics.ListCreateAPIView):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
+
+class StudentDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
+
+'''
 ### Mixins based API Implementation ###
 
 class StudentList(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
@@ -33,7 +42,6 @@ class StudentDetail(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.D
     def delete(self, request, pk):
         return self.destroy(request, pk)
 
-'''
 ### RAW API Implementation ###
 
 class StudentList(APIView):
